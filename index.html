@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#F8F6FB">
+  <meta name="description" content="Jam digital WIB, alarm, stopwatch, dan timer dengan tampilan lilac yang lembut.">
+  <title>Lilac Clock ✦ Jam, Alarm, Stopwatch &amp; Timer</title>
+
+  <!-- Font (opsional). Jika offline, browser otomatis memakai font sistem. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90' fill='%238B7BB8'%3E%E2%98%BE%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- Kumpulan icon (gaya Lucide, inline SVG supaya tidak butuh internet) -->
+  <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></symbol>
+      <symbol id="i-alarm" viewBox="0 0 24 24"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2 2"/><path d="M5 3 2 6"/><path d="m22 6-3-3"/><path d="M6.38 18.7 4 21"/><path d="M17.64 18.67 20 21"/></symbol>
+      <symbol id="i-stopwatch" viewBox="0 0 24 24"><line x1="10" x2="14" y1="2" y2="2"/><line x1="12" x2="15" y1="14" y2="11"/><circle cx="12" cy="14" r="8"/></symbol>
+      <symbol id="i-timer" viewBox="0 0 24 24"><path d="M5 22h14"/><path d="M5 2h14"/><path d="M17 22v-4.172a2 2 0 0 0-.586-1.414L12 12l-4.414 4.414A2 2 0 0 0 7 17.828V22"/><path d="M7 2v4.172a2 2 0 0 0 .586 1.414L12 12l4.414-4.414A2 2 0 0 0 17 6.172V2"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></symbol>
+      <symbol id="i-volume" viewBox="0 0 24 24"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><line x1="21" x2="14" y1="4" y2="4"/><line x1="10" x2="3" y1="4" y2="4"/><line x1="21" x2="12" y1="12" y2="12"/><line x1="8" x2="3" y1="12" y2="12"/><line x1="21" x2="16" y1="20" y2="20"/><line x1="12" x2="3" y1="20" y2="20"/><line x1="14" x2="14" y1="2" y2="6"/><line x1="8" x2="8" y1="10" y2="14"/><line x1="16" x2="16" y1="18" y2="22"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+      <symbol id="i-pause" viewBox="0 0 24 24"><rect x="14" y="4" width="4" height="16" rx="1"/><rect x="6" y="4" width="4" height="16" rx="1"/></symbol>
+      <symbol id="i-reset" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M12 5v14"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" x2="4" y1="22" y2="15"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></symbol>
+      <symbol id="i-pencil" viewBox="0 0 24 24"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Dekorasi latar (hanya hiasan, disembunyikan dari screen reader) -->
+  <div class="bg" aria-hidden="true">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+    <span class="deco d1">✦</span>
+    <span class="deco d2">✧</span>
+    <span class="deco d3">⋆</span>
+    <span class="deco d4">☾</span>
+    <span class="deco d5">✦</span>
+    <span class="deco d6">✧</span>
+  </div>
+
+  <div class="app">
+
+    <!-- Navigasi: sidebar di desktop, bottom bar di mobile/tablet -->
+    <nav class="nav" aria-label="Navigasi utama">
+      <button class="nav-btn is-active" type="button" data-view="clock" aria-current="page">
+        <svg class="i" aria-hidden="true"><use href="#i-clock"/></svg><span>Clock</span>
+      </button>
+      <button class="nav-btn" type="button" data-view="alarm">
+        <svg class="i" aria-hidden="true"><use href="#i-alarm"/></svg><span>Alarm</span>
+      </button>
+      <button class="nav-btn" type="button" data-view="stopwatch">
+        <svg class="i" aria-hidden="true"><use href="#i-stopwatch"/></svg><span>Stopwatch</span>
+      </button>
+      <button class="nav-btn" type="button" data-view="timer">
+        <svg class="i" aria-hidden="true"><use href="#i-timer"/></svg><span>Timer</span>
+      </button>
+    </nav>
+
+    <main class="stage">
+
+      <header class="topbar">
+        <div class="brand"><span class="brand-mark" aria-hidden="true">☾</span> Lilac Clock</div>
+        <div class="topbar-actions">
+          <!-- Muncul jika browser belum mengizinkan suara -->
+          <button class="chip-btn" id="audio-chip" type="button" hidden>
+            <svg class="i" aria-hidden="true"><use href="#i-volume"/></svg><span>Aktifkan suara</span>
+          </button>
+          <button class="icon-btn" id="open-settings" type="button" aria-label="Pengaturan suara dan volume">
+            <svg class="i" aria-hidden="true"><use href="#i-settings"/></svg>
+          </button>
+        </div>
+      </header>
+
+      <noscript><p class="empty-text">Aplikasi ini membutuhkan JavaScript agar dapat berjalan.</p></noscript>
+
+      <!-- ================= CLOCK ================= -->
+      <section class="view view-clock" id="view-clock" aria-label="Jam">
+        <p class="greeting" id="greeting">Selamat datang ✦</p>
+
+        <div class="clock-face" id="clock-face" role="img" aria-label="Jam digital">
+          <span class="halo" aria-hidden="true"></span>
+          <div class="digits clock-digits" id="clock-time" aria-hidden="true"></div>
+        </div>
+
+        <div class="sec-track" aria-hidden="true"><span id="sec-fill"></span></div>
+
+        <p class="date" id="clock-date">&nbsp;</p>
+        <p class="tz">Waktu Indonesia Barat · Jakarta</p>
+
+        <button class="next-card" id="next-alarm" type="button">
+          <span class="next-icon" aria-hidden="true"><svg class="i"><use href="#i-bell"/></svg></span>
+          <span class="next-body">
+            <span class="next-kicker">Alarm berikutnya</span>
+            <span class="next-time" id="next-time">--:--</span>
+            <span class="next-meta" id="next-meta">Belum ada alarm aktif</span>
+          </span>
+          <span class="badge" id="next-badge">OFF</span>
+        </button>
+      </section>
+
+      <!-- ================= ALARM ================= -->
+      <section class="view" id="view-alarm" aria-label="Alarm" hidden>
+        <div class="view-head">
+          <h1>Alarm</h1>
+          <button class="btn btn-primary" id="add-alarm-btn" type="button">
+            <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg><span>Tambah Alarm</span>
+          </button>
+        </div>
+
+        <ul class="alarm-list" id="alarm-list"></ul>
+
+        <div class="empty" id="alarm-empty" hidden>
+          <span class="empty-icon" aria-hidden="true"><svg class="i"><use href="#i-bell"/></svg></span>
+          <h2>Belum ada alarm ✦</h2>
+          <p>Tambahkan alarm untuk mengatur waktumu.</p>
+          <button class="btn btn-soft" id="add-alarm-empty" type="button">
+            <svg class="i" aria-hidden="true"><use href="#i-plus"/></svg><span>Tambah Alarm</span>
+          </button>
+        </div>
+      </section>
+
+      <!-- ================= STOPWATCH ================= -->
+      <section class="view" id="view-stopwatch" aria-label="Stopwatch" hidden>
+        <div class="view-head"><h1>Stopwatch</h1>
+          <span class="status" id="sw-status"><span class="dot" aria-hidden="true"></span><span id="sw-status-text">Siap</span></span>
+        </div>
+
+        <div class="panel sw-panel">
+          <div class="digits sw-digits" id="sw-time" role="timer" aria-label="Waktu stopwatch"></div>
+          <p class="digit-legend" aria-hidden="true"><span>jam</span><span>menit</span><span>detik</span><span>ms</span></p>
+
+          <div class="control-row">
+            <button class="btn btn-soft" id="sw-reset" type="button" disabled>
+              <svg class="i" aria-hidden="true"><use href="#i-reset"/></svg><span>Reset</span>
+            </button>
+            <button class="btn btn-primary btn-lg" id="sw-toggle" type="button">
+              <svg class="i" aria-hidden="true"><use href="#i-play"/></svg><span>Start</span>
+            </button>
+            <button class="btn btn-soft" id="sw-lap" type="button" disabled>
+              <svg class="i" aria-hidden="true"><use href="#i-flag"/></svg><span>Lap</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="laps-wrap">
+          <p class="empty-text" id="lap-empty">Belum ada lap. Tekan Lap saat stopwatch berjalan.</p>
+          <ol class="laps" id="lap-list" aria-label="Daftar lap"></ol>
+        </div>
+      </section>
+
+      <!-- ================= TIMER ================= -->
+      <section class="view" id="view-timer" aria-label="Timer" hidden>
+        <div class="view-head"><h1>Timer</h1>
+          <span class="status" id="timer-status"><span class="dot" aria-hidden="true"></span><span id="timer-status-text">Siap</span></span>
+        </div>
+
+        <div class="timer-ring" id="timer-ring">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <circle class="ring-track" cx="50" cy="50" r="46"/>
+            <circle class="ring-progress" id="timer-progress" cx="50" cy="50" r="46"/>
+          </svg>
+          <div class="timer-center">
+            <div class="digits timer-digits" id="timer-time" role="timer" aria-label="Sisa waktu timer"></div>
+            <p class="timer-done-text" id="timer-done-text" hidden>Waktu habis ✦</p>
+          </div>
+        </div>
+
+        <div class="timer-setup" id="timer-setup">
+          <div class="time-inputs">
+            <label class="field"><span>Jam</span>
+              <input id="timer-h" type="number" inputmode="numeric" min="0" max="99" value="0">
+            </label>
+            <label class="field"><span>Menit</span>
+              <input id="timer-m" type="number" inputmode="numeric" min="0" max="59" value="5">
+            </label>
+            <label class="field"><span>Detik</span>
+              <input id="timer-s" type="number" inputmode="numeric" min="0" max="59" value="0">
+            </label>
+          </div>
+
+          <div class="presets" role="group" aria-label="Preset timer">
+            <button class="preset" type="button" data-seconds="60">1 menit</button>
+            <button class="preset" type="button" data-seconds="300">5 menit</button>
+            <button class="preset" type="button" data-seconds="600">10 menit</button>
+            <button class="preset" type="button" data-seconds="900">15 menit</button>
+            <button class="preset" type="button" data-seconds="1800">30 menit</button>
+          </div>
+        </div>
+
+        <div class="control-row">
+          <button class="btn btn-soft" id="timer-reset" type="button" disabled>
+            <svg class="i" aria-hidden="true"><use href="#i-reset"/></svg><span>Reset</span>
+          </button>
+          <button class="btn btn-primary btn-lg" id="timer-toggle" type="button">
+            <svg class="i" aria-hidden="true"><use href="#i-play"/></svg><span>Start</span>
+          </button>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- ================= DIALOG: TAMBAH / UBAH ALARM ================= -->
+  <dialog class="dialog" id="alarm-dialog" aria-labelledby="alarm-dialog-title">
+    <form class="sheet" id="alarm-form" novalidate>
+      <div class="sheet-head">
+        <h2 id="alarm-dialog-title">Tambah Alarm</h2>
+        <button class="icon-btn small" id="alarm-close" type="button" aria-label="Tutup">
+          <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </div>
+
+      <div class="time-picker">
+        <label class="select-wrap"><span class="sr-only">Jam</span>
+          <select id="alarm-hour" aria-label="Jam"></select>
+        </label>
+        <span class="time-sep" aria-hidden="true">:</span>
+        <label class="select-wrap"><span class="sr-only">Menit</span>
+          <select id="alarm-minute" aria-label="Menit"></select>
+        </label>
+      </div>
+
+      <label class="field field-wide"><span>Nama alarm</span>
+        <input id="alarm-label" type="text" maxlength="30" placeholder="Contoh: Bangun pagi" autocomplete="off">
+      </label>
+
+      <div class="label-chips" role="group" aria-label="Saran nama alarm">
+        <button class="preset" type="button" data-label="Bangun pagi">Bangun pagi</button>
+        <button class="preset" type="button" data-label="Belajar">Belajar</button>
+        <button class="preset" type="button" data-label="Meeting">Meeting</button>
+      </div>
+
+      <label class="switch-row">
+        <span>
+          <strong>Ulangi setiap hari</strong>
+          <small>Jika mati, alarm hanya berbunyi sekali.</small>
+        </span>
+        <span class="switch">
+          <input id="alarm-repeat" type="checkbox" role="switch">
+          <span class="switch-track" aria-hidden="true"></span>
+        </span>
+      </label>
+
+      <div class="sheet-actions">
+        <button class="btn btn-ghost" id="alarm-cancel" type="button">Batal</button>
+        <button class="btn btn-primary" type="submit">
+          <svg class="i" aria-hidden="true"><use href="#i-check"/></svg><span>Simpan</span>
+        </button>
+      </div>
+    </form>
+  </dialog>
+
+  <!-- ================= DIALOG: PENGATURAN SUARA ================= -->
+  <dialog class="dialog" id="settings-dialog" aria-labelledby="settings-title">
+    <div class="sheet">
+      <div class="sheet-head">
+        <h2 id="settings-title">Suara alarm</h2>
+        <button class="icon-btn small" id="settings-close" type="button" aria-label="Tutup pengaturan">
+          <svg class="i" aria-hidden="true"><use href="#i-x"/></svg>
+        </button>
+      </div>
+
+      <fieldset class="sound-options">
+        <legend class="sr-only">Pilih nada</legend>
+        <label class="sound-opt"><input type="radio" name="sound" value="bell"><span>Soft Bell</span></label>
+        <label class="sound-opt"><input type="radio" name="sound" value="digital"><span>Digital</span></label>
+        <label class="sound-opt"><input type="radio" name="sound" value="cute"><span>Cute</span></label>
+        <label class="sound-opt"><input type="radio" name="sound" value="classic"><span>Classic</span></label>
+      </fieldset>
+
+      <div class="volume-row">
+        <label for="volume">
+          <svg class="i" aria-hidden="true"><use href="#i-volume"/></svg> Volume
+        </label>
+        <input id="volume" type="range" min="0" max="100" step="1" value="70">
+        <output id="volume-val" for="volume">70%</output>
+      </div>
+
+      <div class="sheet-actions">
+        <button class="btn btn-soft" id="test-sound" type="button">
+          <svg class="i" aria-hidden="true"><use href="#i-play"/></svg><span>Coba suara</span>
+        </button>
+        <button class="btn btn-primary" id="settings-done" type="button">Selesai</button>
+      </div>
+    </div>
+  </dialog>
+
+  <!-- ================= DIALOG: ALARM / TIMER BERBUNYI ================= -->
+  <dialog class="dialog ring" id="ring-dialog" aria-labelledby="ring-title" aria-describedby="ring-text">
+    <div class="sheet ring-card">
+      <div class="ring-bell" aria-hidden="true"><svg class="i"><use href="#i-bell"/></svg></div>
+      <p class="ring-greeting" id="ring-greeting">Selamat pagi ✦</p>
+      <h2 id="ring-title">Alarm</h2>
+      <p class="ring-time" id="ring-time">00:00</p>
+      <p class="ring-text" id="ring-text">Saatnya!</p>
+      <p class="ring-hint" id="ring-hint" hidden>Browser memblokir suara. Ketuk di mana saja untuk mengaktifkannya.</p>
+      <div class="ring-actions">
+        <button class="btn btn-primary btn-lg" id="ring-stop" type="button">Matikan</button>
+        <div class="snooze-row" id="snooze-row">
+          <button class="btn btn-soft" id="ring-snooze-5" type="button">Snooze 5m</button>
+          <button class="btn btn-soft" id="ring-snooze-10" type="button">Snooze 10m</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="js/script.js" defer></script>
+</body>
+</html>
